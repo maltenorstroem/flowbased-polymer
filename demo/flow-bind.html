@@ -9,7 +9,7 @@
     <script type="module" src="../../../@polymer/iron-demo-helpers/demo-pages-shared-styles.js"></script>
     <script type="module" src="../../../@polymer/iron-demo-helpers/demo-snippet.js"></script>
 
-
+    <script type="module" src="../flow-bind.js"></script>
 
     <!-- FIXME(polymer-modulizer):
         These imperative modules that innerHTML your HTML are
@@ -30,32 +30,35 @@ document.head.appendChild($_documentContainer.content);
 </head>
 <body>
 
-<script type="module">
-const $_documentContainer = document.createElement('template');
-
-$_documentContainer.innerHTML = `<div class="vertical-section-container centered">
-    <h3>Basic flowbased-polymer Demo</h3>
-
-    <hr>
-    click above,
+<div class="vertical-section-container centered">
+    <h3>flow-bind  Demo</h3>
     <demo-snippet>
-
+        <template>
+            <flow-bind id="elem">
                 <template>
+                    <button id="btn" @-click="--clk">click me</button>
+                    <span id="dd" ƒ-done="--clk"></span>
 
-                    <button @-tap="--requestAjax">Request Ajax</button>
-                    <iron-ajax ƒ-generate-request="--requestAjax" @-response="((_response))" url="../bower.json" handle-as="json"></iron-ajax>
-                    <hr>
-                    receivedResponse.response.version = {{_response.response.version}}
-                    <hr>
-                    <inspect-flow property="[[_response.response]]"></inspect-flow>
+                    <button @-click="--bclicked" ƒ-remove="--bclicked">Remove Me</button>
 
+                    <script>
+                        // you can also script with flow-bind
+
+                        let host = elem;
+                        // add method done to element with id `dd`
+                        host.$.dd.done = e => {
+                            host.$.dd.innerHTML = e;
+                        }
+                     </script>
                 </template>
+            </flow-bind>
+        </template>
 
     </demo-snippet>
-</div>`;
+</div>
 
-document.body.appendChild($_documentContainer.content);
-</script>
+
+
 
 </body>
 </html>

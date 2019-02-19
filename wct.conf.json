@@ -2,13 +2,11 @@
     "suites": ["test/*_test.html"],
     "verbose": true,
     "plugins": {
-        "istanbul": {
+        "istanbub": {
             "dir": "./coverage",
             "reporters": ["text-summary", "lcov"],
             "include": [
-                "/mixin.html",
-                "/behaviour.html",
-                "/basic/stream-count.html"
+                "*.js"
             ],
             "exclude": []
         },
